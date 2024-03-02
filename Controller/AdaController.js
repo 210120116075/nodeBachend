@@ -1,6 +1,7 @@
 const AdaSchema = require("../Schema/AdaSchema");
 
 const updateAda = async (req,res) =>{
+    console.log("heeee");
     const sub = req.params.ada;
     // const updatedAda  = await AdaSchema.findByIdAndUpdate(id,{attendanceStatus:true})
     // const id  = await AdaSchema.findOne({studentId : sub})
