@@ -3,6 +3,6 @@ const router = express.Router()
 
 const attendanceController = require('../Controller/AttendanceController');
 
-router.post('/add/:id/:qrText'+attendanceController.addAttendance)
-
+// router.post('/add/:id/:qrText'+attendanceController.addAttendance)
+router.post('/add',attendanceController.addAttendance)
 module.exports = router;
