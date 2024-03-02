@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-    fName: {
+    firstName: {
         type: String,
     },
-    lName: {
+    lastName: {
         type: String,
     },
     enrollmentNumber: {
-        type: Number
+        type: Number,
+        required: true
     },
     email: {
         type: String,
@@ -20,10 +21,13 @@ const StudentSchema = new Schema({
     mobileNo: {
         type: Number
     },
-    attendanceStatus: {
-        type: Boolean,
-        default: false
+    branch: {
+        type: Schema.Types.ObjectId,
+        ref: 'branch'
     },
+    sem: {
+        type: Schema.Types.ObjectId,
+        ref: 'sem'
+    }
 })
-
-module.exports = mongoose.model('Students', StudentSchema);
+module.exports = mongoose.model('Student', StudentSchema);

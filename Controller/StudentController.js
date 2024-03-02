@@ -24,7 +24,9 @@ const loginStudent = async (req, res) => {
 }
 
 const updateStudent = async (req,res) =>{
+    
     const id = req.params.id;
+    console.log(id);
     const updatedStudent  = await studentSchema.findByIdAndUpdate(id,{attendanceStatus:true})
     res.status(200).json({
         message : "success"
@@ -62,18 +64,20 @@ const loginUserWithEnc = async (req, res) => {
 const registerUserWithEnc = async (req, res) => {
     const hashedPassword = await passwordUtil.encryptPassword(req.body.password);
     const studentObj = {
-        fName: req.body.fName,
-        lName: req.body.lName,
+        firstName: req.body.fName,
+        lastName: req.body.lName,
         enrollmentNumber: req.body.enrollmentNumber,
         email: req.body.email,
         password: hashedPassword,
         mobileNo: req.body.mobileNo,
+        branch: req.body.branch,
+        sem: req.body.sem,
     }
     const student = new studentSchema(studentObj);
     var token = tokenUtil.generateToken(student.toObject());
     student.save().then((data) => {
 
-        mailUtil.sendMail(req.body.email, "welcome to our app", "this is test mail from nodejs").then((data) => {
+        mailUtil.sendMail(req.body.email, "welcome to our app").then((data) => {
             console.log(data);
         }).catch((err) => {
             console.log(err);
@@ -120,6 +124,5 @@ module.exports = {
     // registerStudent
     loginUserWithEnc,
     registerUserWithEnc,
-    updateStudent
-    
+    updateStudent   
 }

@@ -9,10 +9,16 @@ const PORT = 3001;
 app.use(express.json());
 app.use(cors());
 const studentRoutes = require('./Routes/StudentRoutes');
-app.use('/user',studentRoutes);
+const facultyRoutes = require('./Routes/FacultyRoutes');
+const branchRoutes = require('./Routes/BranchRoutes');
+const semRoutes = require('./Routes/SemRoutes');
+app.use('/student',studentRoutes);
+app.use('/faculty',facultyRoutes);
+app.use('/branch',branchRoutes);
+app.use('/sem',semRoutes);
 
-mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
-// mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
+// mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
+mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
 
     useNewUrlParser: true,
     useUnifiedTopology: true
