@@ -12,13 +12,18 @@ const studentRoutes = require('./Routes/StudentRoutes');
 const facultyRoutes = require('./Routes/FacultyRoutes');
 const branchRoutes = require('./Routes/BranchRoutes');
 const semRoutes = require('./Routes/SemRoutes');
+const subjectRoutes = require("./Routes/SubjectRoutes");
+const qrRoutes = require("./Routes/QRRoutes");
 app.use('/student',studentRoutes);
 app.use('/faculty',facultyRoutes);
 app.use('/branch',branchRoutes);
 app.use('/sem',semRoutes);
+app.use('/subject',subjectRoutes);
+app.use('/qrcode',qrRoutes);
+app.use('/attendance',qrRoutes);
 
-mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
-// mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
+// mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
+mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
 
     useNewUrlParser: true,
     useUnifiedTopology: true

@@ -64,8 +64,8 @@ const loginUserWithEnc = async (req, res) => {
 const registerUserWithEnc = async (req, res) => {
     const hashedPassword = await passwordUtil.encryptPassword(req.body.password);
     const studentObj = {
-        firstName: req.body.fName,
-        lastName: req.body.lName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         enrollmentNumber: req.body.enrollmentNumber,
         email: req.body.email,
         password: hashedPassword,
@@ -73,6 +73,7 @@ const registerUserWithEnc = async (req, res) => {
         branch: req.body.branch,
         sem: req.body.sem,
     }
+    console.log("branch",req.body.branch);
     const student = new studentSchema(studentObj);
     var token = tokenUtil.generateToken(student.toObject());
     student.save().then((data) => {

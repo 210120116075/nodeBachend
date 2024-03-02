@@ -14,6 +14,20 @@ const addSem = async(req,res)=>{
         })
     })
 }
+const getAllSem = async (req, res) => {
+    const sem = await semSchema.find();
+    if (sem) {
+        res.status(200).json({
+            message: "semister fetch successfully",
+            data: sem
+        });
+    } else {
+        res.status(500).json({
+            message: "Error in fetching semister",
+        });
+    }
+}
 module.exports={
-    addSem
+    addSem,
+    getAllSem
 }
