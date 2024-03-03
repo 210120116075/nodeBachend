@@ -33,19 +33,18 @@ const generateQR = async (req, res) => {
     })
 }
 const completeQR = async (req, res) => {
-    const status = req.body.status;
-    const qrCode = new qrSchema({qrStatus: status});
-    qrCode.save().then((data) => {
+    const qrText1 = req.body.qrText;
+    const qrData1 = await qrSchema.findOneAndUpdate({ qrText: qrText1 }, { qrStatus: "complete" });
+    if (qrData1) {
         res.status(200).json({
-            message: "data add successfully",
-            data: qrText
+            message: "success"
         })
-    }).catch((err) => {
+    }else{
         res.status(500).json({
-            message: "error",
-            error: err
+            message: "error"
         })
-    })
+    }
+
 }
 
 module.exports = {
