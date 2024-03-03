@@ -32,7 +32,23 @@ const generateQR = async (req, res) => {
         })
     })
 }
+const completeQR = async (req, res) => {
+    const status = req.body.status;
+    const qrCode = new qrSchema({qrStatus: status});
+    qrCode.save().then((data) => {
+        res.status(200).json({
+            message: "data add successfully",
+            data: qrText
+        })
+    }).catch((err) => {
+        res.status(500).json({
+            message: "error",
+            error: err
+        })
+    })
+}
 
 module.exports = {
-    generateQR
+    generateQR,
+    completeQR
 }
