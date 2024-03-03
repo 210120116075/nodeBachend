@@ -21,7 +21,7 @@ app.use('/branch',branchRoutes);
 app.use('/sem',semRoutes);
 app.use('/subject',subjectRoutes);
 app.use('/qrcode',qrRoutes);
-app.use('/attendance',attendanceRoutes);
+// app.use('/attendance',attendanceRoutes);
 
 mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
 // mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
