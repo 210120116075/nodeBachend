@@ -34,14 +34,19 @@ const generateQR = async (req, res) => {
 }
 const completeQR = async (req, res) => {
     const qrText1 = req.body.qrText;
-    const qrData1 = await qrSchema.findOneAndUpdate({ qrText: qrText1 }, { qrStatus: "complete" });
+    console.log(qrText1);
+    const qrData1 = await qrSchema.findOneAndUpdate(
+        { qrText: qrText1 },
+        { $set: { qrStatus: "complete" } }
+    );
+    
     if (qrData1) {
         res.status(200).json({
             message: "success"
         })
     }else{
         res.status(500).json({
-            message: "error"
+            message: "error 1"
         })
     }
 
