@@ -15,10 +15,17 @@ const QRSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref : "subject"
     },
+    facultyId : {
+        type:Schema.Types.ObjectId,
+        ref : "faculty"
+    },
     qrStatus : {
         type:String
     },
     qrText : {
+        type:String
+    },
+    createdAt:{
         type:String
     }
 })

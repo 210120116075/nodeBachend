@@ -30,4 +30,4 @@ const StudentSchema = new Schema({
         ref: 'sem'
     }
 })
-module.exports = mongoose.model('Student', StudentSchema);
+module.exports = mongoose.model('student', StudentSchema);

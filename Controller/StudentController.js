@@ -33,6 +33,25 @@ const updateStudent = async (req,res) =>{
     })
 }
 
+const getAllStudent = async (req,res)=>{
+    var branch = req.body.branch;
+    var sem = req.body.sem;
+    console.log(branch);
+    console.log(sem);
+    const students = await studentSchema.find({branch:branch,sem:sem}).populate('branch').populate('sem');
+    if(students){
+        res.status(200).json({
+            message:"student fetch successfull",
+            data : students
+        })
+    }
+    else{
+        res.status(500).json({
+            message:"error in fetch student",
+        })
+    }
+}
+
 const loginUserWithEnc = async (req, res) => {
     var sEmail = req.body.email;
     var sPassword = req.body.password;
@@ -125,5 +144,6 @@ module.exports = {
     // registerStudent
     loginUserWithEnc,
     registerUserWithEnc,
-    updateStudent   
+    updateStudent,
+    getAllStudent
 }

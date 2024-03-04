@@ -12,12 +12,13 @@ const addAttendance = async (req, res) => {
         'qrText':qrText1,
         'qrStatus':"generated"
     });
-    // console.log("qr :", qrData1[0].branch);
-    if (qrData1) {
+    console.log(qrData1);
+    if (qrData1 && qrData1.length>0) {
         const attendanceObj = {
             branch: qrData1[0].branch,
             sem: qrData1[0].sem,
             subject: qrData1[0].subject,
+            facultyId : qrData1[0].facultyId,
             studentId: id,
             attendanceStatus: "present"
         }
@@ -34,8 +35,32 @@ const addAttendance = async (req, res) => {
             });
         })
     }
+    else{
+        res.status(500).json({
+            message:"you are late sorry"
+        })
+    }
 
 }
+const getAllAttendance = async (req,res)=>{
+    var studentId = req.body.sId;
+    console.log("student : ",studentId);
+    const attendance = await attendanceSchema.find({studentId:studentId}).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
+    console.log(attendance);
+
+    if(attendance){
+        res.status(200).json({
+            message : "attendance fetch successfully",
+            data : attendance
+        })
+    }
+    else{
+        res.status(500).json({
+            message : "error in fetch attendance"
+        })
+    }
+}
 module.exports = {
-    addAttendance
+    addAttendance,
+    getAllAttendance
 }

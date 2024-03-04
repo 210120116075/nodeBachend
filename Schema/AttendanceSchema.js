@@ -19,9 +19,13 @@ const attendanceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "student"
     },
-    attendanceStatus : {
-        type : String
+    facultyId: {
+        type: Schema.Types.ObjectId,
+        ref: "faculty"
+    },
+    attendanceStatus: {
+        type: String
     }
 })
 
-module.exports = mongoose.model('attendance',attendanceSchema);
+module.exports = mongoose.model('attendance', attendanceSchema);

@@ -16,6 +16,7 @@ const addBranch = async (req, res) => {
 }
 const getAllBranch = async (req, res) => {
     const Branch = await branchSchema.find();
+    // console.log(Branch);
     if (Branch) {
         res.status(200).json({
             message: "Branch fetch successfully",

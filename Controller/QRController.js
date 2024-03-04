@@ -13,9 +13,10 @@ const generateQR = async (req, res) => {
     const qrText = await randomStr(20, '12345abcde');
     // console.log(qrText);
     const qrObj = {
-        branch: req.body.branch,
-        sem: req.body.sem,
-        subject: req.body.subject,
+        branch: req.body.data.branch,
+        sem: req.body.data.sem,
+        subject: req.body.data.subject,
+        facultyId : req.body.facultyId,
         qrStatus: "generated",
         qrText: qrText
     }

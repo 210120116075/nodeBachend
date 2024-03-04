@@ -60,7 +60,24 @@ const loginFacultyWithEnc = async (req,res)=>{
         })
     }
 }
+
+const getAllFaculty = async (req,res)=>{
+    const faculty = await facultySchema.find();
+
+    if(faculty){
+        res.status(200).json({
+            message:"faculty fetch successfull",
+            data : faculty
+        })
+    }
+    else{
+        res.status(500).json({
+            message:"error in fetch faculty",
+        })
+    }
+}
 module.exports = {
     registerFacultyWithEnc,
-    loginFacultyWithEnc
+    loginFacultyWithEnc,
+    getAllFaculty
 }
