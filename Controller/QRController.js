@@ -1,3 +1,4 @@
+const { Mongoose } = require('mongoose');
 const qrSchema = require('../Schema/QRSchema');
 const randomStr = async (len, arr) => {
     let ans = '';
@@ -19,7 +20,9 @@ const generateQR = async (req, res) => {
         // facultyId : req.body.facultyId,
         facultyId : "65e575b739921101a098e840",
         qrStatus: "generated",
-        qrText: qrText
+        qrText: qrText,
+        createdAt:new Date()
+
     }
     const qrCode = new qrSchema(qrObj);
     qrCode.save().then((data) => {
