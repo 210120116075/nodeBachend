@@ -40,7 +40,8 @@ const addAttendance = async (req, res) => {
     }
     else {
         res.status(500).json({
-            message: "sorry you are late this qr is disable"
+            message: "You are late this qr is disable",
+            data : "SORRY"
         })
     }
 
