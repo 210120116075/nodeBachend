@@ -25,6 +25,10 @@ const attendanceSchema = new Schema({
     },
     attendanceStatus: {
         type: String
+    },
+    dateStatus : {
+        type: Schema.Types.ObjectId,
+        ref: "qrCode"
     }
 })
 

@@ -10,7 +10,11 @@ const randomStr = async (len, arr) => {
 }
 const generateQR = async (req, res) => {
 
-
+    const options = {
+        timeZone: 'Asia/Kolkata', 
+        hour12: true,
+      };
+    
     const qrText = await randomStr(20, '12345abcde');
     // console.log(qrText);
     const qrObj = {
@@ -21,7 +25,7 @@ const generateQR = async (req, res) => {
         facultyId : "65e575b739921101a098e840",
         qrStatus: "generated",
         qrText: qrText,
-        createdAt:new Date().toLocaleString()
+        createdAt:new Date().toLocaleString('en-IN', options)
 
     }
     const qrCode = new qrSchema(qrObj);

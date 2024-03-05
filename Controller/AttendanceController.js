@@ -20,6 +20,7 @@ const addAttendance = async (req, res) => {
             subject: qrData1[0].subject,
             facultyId: qrData1[0].facultyId,
             studentId: id,
+            dateStatus : qrData1[0].createdAt,
             attendanceStatus: "present"
         }
 
@@ -46,7 +47,7 @@ const addAttendance = async (req, res) => {
 const getAllAttendance = async (req, res) => {
     var studentId = req.body.sId;
     console.log("student : ", studentId);
-    const attendance = await attendanceSchema.find({ studentId: studentId }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
+    const attendance = await attendanceSchema.find({ studentId: studentId }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId').populate("dateStatus");
     console.log(attendance);
 
     if (attendance) {
@@ -66,7 +67,7 @@ const getSubjectWiseAttendance = async (req, res) => {
     var subjectId = req.body.subjectId;
     console.log("student : ", studentId);
     console.log("subject : ", subjectId.subject);
-    const attendance = await attendanceSchema.find({ studentId: studentId, subject: subjectId.subject }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
+    const attendance = await attendanceSchema.find({ studentId: studentId, subject: subjectId.subject }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId').populate("dateStatus");
     console.log(attendance);
 
     if (attendance) {
