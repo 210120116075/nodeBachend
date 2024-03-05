@@ -9,24 +9,25 @@ const addAttendance = async (req, res) => {
     console.log("id : " + id);
     console.log("qrText : " + qrText1);
     const qrData1 = await qrSchema.find({
-        'qrText':qrText1,
-        'qrStatus':"generated"
+        'qrText': qrText1,
+        'qrStatus': "generated"
     });
     console.log(qrData1);
-    if (qrData1 && qrData1.length>0) {
+    if (qrData1 && qrData1.length > 0) {
         const attendanceObj = {
             branch: qrData1[0].branch,
             sem: qrData1[0].sem,
             subject: qrData1[0].subject,
-            facultyId : qrData1[0].facultyId,
+            facultyId: qrData1[0].facultyId,
             studentId: id,
             attendanceStatus: "present"
         }
+
         const attendance = new attendanceSchema(attendanceObj);
-        attendance.save().then((data) => {
+        (await attendance.save()).populate("studentId").then((data) => {
             res.status(200).json({
                 message: "attendance fill successfully",
-                data: id
+                data: data.studentId.enrollmentNumber
             });
         }).catch((err) => {
             res.status(500).json({
@@ -35,32 +36,53 @@ const addAttendance = async (req, res) => {
             });
         })
     }
-    else{
+    else {
         res.status(500).json({
-            message:"you are late sorry"
+            message: "sorry you are late this qr is disable"
         })
     }
 
 }
-const getAllAttendance = async (req,res)=>{
+const getAllAttendance = async (req, res) => {
     var studentId = req.body.sId;
-    console.log("student : ",studentId);
-    const attendance = await attendanceSchema.find({studentId:studentId}).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
+    console.log("student : ", studentId);
+    const attendance = await attendanceSchema.find({ studentId: studentId }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
     console.log(attendance);
 
-    if(attendance){
+    if (attendance) {
         res.status(200).json({
-            message : "attendance fetch successfully",
-            data : attendance
+            message: "attendance fetch successfully",
+            data: attendance
         })
     }
-    else{
+    else {
         res.status(500).json({
-            message : "error in fetch attendance"
+            message: "error in fetch attendance"
+        })
+    }
+}
+const getSubjectWiseAttendance = async (req, res) => {
+    var studentId = req.body.sId;
+    var subjectId = req.body.subjectId;
+    console.log("student : ", studentId);
+    console.log("subject : ", subjectId.subject);
+    const attendance = await attendanceSchema.find({ studentId: studentId, subject: subjectId.subject }).populate('branch').populate('sem').populate('subject').populate('studentId').populate('facultyId');
+    console.log(attendance);
+
+    if (attendance) {
+        res.status(200).json({
+            message: "attendance fetch successfully",
+            data: attendance
+        })
+    }
+    else {
+        res.status(500).json({
+            message: "error in fetch attendance"
         })
     }
 }
 module.exports = {
     addAttendance,
-    getAllAttendance
+    getAllAttendance,
+    getSubjectWiseAttendance
 }

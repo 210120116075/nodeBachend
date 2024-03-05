@@ -16,7 +16,8 @@ const generateQR = async (req, res) => {
         branch: req.body.data.branch,
         sem: req.body.data.sem,
         subject: req.body.data.subject,
-        facultyId : req.body.facultyId,
+        // facultyId : req.body.facultyId,
+        facultyId : "65e575b739921101a098e840",
         qrStatus: "generated",
         qrText: qrText
     }
