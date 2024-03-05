@@ -22,7 +22,6 @@ const generateQR = async (req, res) => {
         sem: req.body.data.sem,
         subject: req.body.data.subject,
         facultyId : req.body.facultyId,
-        // facultyId : "65e575b739921101a098e840",
         qrStatus: "generated",
         qrText: qrText,
         createdAt:new Date().toLocaleString('en-IN', options)
