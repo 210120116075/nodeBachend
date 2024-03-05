@@ -21,7 +21,7 @@ const generateQR = async (req, res) => {
         facultyId : "65e575b739921101a098e840",
         qrStatus: "generated",
         qrText: qrText,
-        createdAt:new Date()
+        createdAt:new Date().toLocaleString()
 
     }
     const qrCode = new qrSchema(qrObj);
