@@ -25,6 +25,7 @@ const addAttendance = async (req, res) => {
         }
 
         const attendance = new attendanceSchema(attendanceObj);
+        console.log("a : ",attendance);
         (await attendance.save()).populate("studentId").then((data) => {
             res.status(200).json({
                 message: "attendance fill successfully",
