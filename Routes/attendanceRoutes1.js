@@ -7,4 +7,5 @@ const attendanceController = require('../Controller/AttendanceController');
 router.post('/add',attendanceController.addAttendance);
 router.post('/getAll',attendanceController.getAllAttendance);
 router.post('/getSubjectWise',attendanceController.getSubjectWiseAttendance)
+router.post('/liveView',attendanceController.getLive);
 module.exports = router;

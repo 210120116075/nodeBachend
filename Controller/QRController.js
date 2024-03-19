@@ -31,7 +31,7 @@ const generateQR = async (req, res) => {
     qrCode.save().then((data) => {
         res.status(200).json({
             message: "data add successfully",
-            data: qrText
+            data: qrCode
         })
     }).catch((err) => {
         res.status(500).json({

@@ -20,12 +20,12 @@ const addAttendance = async (req, res) => {
             subject: qrData1[0].subject,
             facultyId: qrData1[0].facultyId,
             studentId: id,
-            dateStatus : qrData1[0].createdAt,
+            dateStatus: qrData1[0].createdAt,
             attendanceStatus: "present"
         }
 
         const attendance = new attendanceSchema(attendanceObj);
-        console.log("a : ",attendance);
+        console.log("a : ", attendance);
         (await attendance.save()).populate("studentId").then((data) => {
             res.status(200).json({
                 message: "attendance fill successfully",
@@ -41,10 +41,26 @@ const addAttendance = async (req, res) => {
     else {
         res.status(200).json({
             message: "You are late this qr is disable",
-            data : "SORRY"
+            data: "SORRY"
         })
     }
 
+}
+const getLive = async (req, res) => {
+    var createdAt = await req.body.createAt;
+    console.log("createdAt : ", createdAt);
+    const attendance = await attendanceSchema.find({
+        // 'dateStatus': createdAt,
+        dateStatus: createdAt
+    }).populate("studentId").populate("facultyId");
+    console.log(attendance);
+
+    if (attendance && attendance.length > 0) {
+        res.status(200).json({
+            message: "fetch",
+            data: attendance
+        });
+    }
 }
 const getAllAttendance = async (req, res) => {
     var studentId = req.body.sId;
@@ -87,5 +103,6 @@ const getSubjectWiseAttendance = async (req, res) => {
 module.exports = {
     addAttendance,
     getAllAttendance,
-    getSubjectWiseAttendance
+    getSubjectWiseAttendance,
+    getLive
 }
