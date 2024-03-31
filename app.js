@@ -29,10 +29,10 @@ app.use((req, res, next) => {
 app.use(cors());
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
-    socket.on('user-message', (msg) => {
-        console.log("msg : ", msg);
-        socket.emit('user-message', msg);
+    console.log('Attendance connected');
+    socket.on('attendance-count', (count) => {
+        console.log("count : ", count);
+        socket.emit('attendance-count', count);
     })
 })
 
