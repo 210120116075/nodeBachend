@@ -14,12 +14,12 @@ const socketIO = require("socket.io");
 
 const io = socketIO(server, {
     cors: {
-        origin: "http://localhost:3001", // Adjust with your React app's URL
+        origin: "https://qrproject-15a08.web.app/qrCode1", // Adjust with your React app's URL
         methods: ["GET", "POST"],
     },
 });
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+    res.header("Access-Control-Allow-Origin", "https://qrproject-15a08.web.app/qrCode1");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
