@@ -3,36 +3,37 @@ const mongoose = require("mongoose");
 const StudentSchema = require('./Schema/StudentSchema')
 const cors = require("cors");
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 
 app.use(express.json());
 
-const {Server} = require("socket.io");
+// const {Server} = require("socket.io");
 const socketIO = require("socket.io");
 
 const io = socketIO(server, {
     cors: {
-        origin: "https://qrproject-15a08.web.app/qrCode1", // Adjust with your React app's URL
-        methods: ["GET", "POST"],
+      origin: "https://qrproject-15a08.web.app", // Adjust with your React app's URL
+      methods: ["GET", "POST"],
     },
-});
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://qrproject-15a08.web.app/qrCode1");
+  });
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://qrproject-15a08.web.app");
     res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
     );
     next();
-});
-app.use(cors());
+  });
+  app.use(cors());
 
-io.on('connection', (socket) => {
+
+io.on('connection',(socket)=>{
     console.log('Attendance connected');
-    socket.on('attendance-count', (count) => {
-        console.log("count : ", count);
-        socket.emit('attendance-count', count);
+    socket.on('attendance-count',(count)=>{
+        console.log("count : ",count);
+        socket.emit('attendance-count',count);
     })
 })
 
@@ -62,7 +63,7 @@ mongoose.connect("mongodb+srv://vedantpatel:vedant@cluster0.uvqub21.mongodb.net/
     console.log("error..", err);
 })
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log("server started on port", PORT);
 });
 
