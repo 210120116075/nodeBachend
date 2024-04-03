@@ -14,12 +14,14 @@ const socketIO = require("socket.io");
 
 const io = socketIO(server, {
     cors: {
-      origin: "https://qrproject-15a08.web.app", // Adjust with your React app's URL
+      origin: "http://localhost:3001", // Adjust with your React app's URL
       methods: ["GET", "POST"],
     },
   });
   app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://qrproject-15a08.web.app");
+    // res.header("Access-Control-Allow-Origin", "https://qrproject-15a08.web.app");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept"
@@ -33,7 +35,8 @@ io.on('connection',(socket)=>{
     console.log('Attendance connected');
     socket.on('attendance-count',(count)=>{
         console.log("count : ",count);
-        socket.emit('attendance-count',count);
+        // socket.broadcast
+        socket.emit('abc',count);
     })
 })
 
@@ -52,9 +55,9 @@ app.use('/subject', subjectRoutes);
 app.use('/qrcode', qrRoutes);
 app.use('/attendance', attendanceRoutes);
 
-// mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
+mongoose.connect("mongodb+srv://samir:samir@cluster0.key63fx.mongodb.net/vedantattandace", {
 // mongoose.connect("mongodb://127.0.0.1:27017/cw1", {
-mongoose.connect("mongodb+srv://vedantpatel:vedant@cluster0.uvqub21.mongodb.net/vedantattandace", {
+// mongoose.connect("mongodb+srv://vedantpatel:vedant@cluster0.uvqub21.mongodb.net/vedantattandace", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
